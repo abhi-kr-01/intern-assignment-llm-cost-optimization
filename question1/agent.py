@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 import re
-import uuid
 from dataclasses import dataclass
 
 from shared.billing import CostSession
@@ -62,14 +61,13 @@ class SupportCopilot:
 
         system = "\n\n".join(
             [
-                f"Run id {uuid.uuid4()}",
                 "You are ShopAssist, the Tier-1 customer support copilot.",
                 _FEW_SHOT,
                 "HELP CENTER:",
                 all_articles_blob(),
                 (
-                    "Instructions: Think step by step. Write full reasoning, quote any article "
-                    "you rely on, then output JSON with action, kb_article, customer_reply."
+                    "Return only JSON with action, kb_article, and customer_reply. "
+                    "Use the order facts and applicable policy. Keep the response concise."
                 ),
             ]
         )
